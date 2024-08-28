@@ -4,8 +4,11 @@ import pandas as pd
 
 app = Flask(__name__)
 
+# Load the trained model and LabelEncoder
 model = joblib.load('models/sleep_disorder_model.pkl')
 le = joblib.load('models/label_encoder.pkl')
+
+# Define the feature order as used during model training
 feature_columns = ['Age', 'Gender', 'Sleep Duration', 'Quality of Sleep', 
                    'Physical Activity Level', 'Stress Level', 'BMI Category', 
                    'Systolic BP', 'Diastolic BP', 'Heart Rate', 'Daily Steps']
@@ -58,5 +61,5 @@ def predict():
         except Exception as e:
             return render_template('index.html', prediction_text=f'Error: {str(e)}')
 
-if __name__== 'main':
+if __name__ == 'main':
     app.run(debug=True)
